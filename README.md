@@ -1,1 +1,1 @@
-# pitds-prject
+# pitds-project
