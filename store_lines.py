@@ -1,3 +1,9 @@
+'''
+Author: Brian Mukeswe
+Institution: The University of Edinburgh
+Date: May 17, 2019
+
+'''
 from multiprocessing import Process
 from pymongo import MongoClient
 import pandas as pd
@@ -7,13 +13,16 @@ data = pd.read_excel("weather_data.xlsx")
 
 def make_lineObj(line, data):
     
+    # create mongo document object
+    # ints are cast as floats to solve mongo encoding issue
     return {
+        "index" :  float(data.index[line]),
         "station_name" : data.station_name.iloc[line],
-        "year" : data.year.iloc[line],
-        "month" : data.month.iloc[line],
+        "year" : float(data.year.iloc[line]),
+        "month" : float(data.month.iloc[line]),
         "tmax_degC" : data.tmax_degC.iloc[line],
         "tmin_degC" : data.tmin_degC.iloc[line],
-        "af_days" : data.af_days.iloc[line],
+        "af_days" : float(data.af_days.iloc[line]),
         "rain_mm" : data.rain_mm.iloc[line],
         "sun_hours" : data.sun_hours.iloc[line] 
     }
@@ -22,20 +31,19 @@ def make_lineObj(line, data):
 def storeObj(obj):
     collection = "weather_data"
     
-    client = MongoClient(host="MIDGARD09", port=27017)
+    client = MongoClient(host="localhost", port=27017)
     db = client.pitds_weather_data
     weather_data = db[collection]
     
     weather_data.insert_one(obj)
 
 
-
 def store_lines(batch):
     
-    batch_dict = {"b1" : [0, 5],
-                  "b2" : [10, 15],
-                  "b3" : [20, 25],
-                  "b4" : [30, 35]
+    batch_dict = {"b1" : [0, 9200],
+                  "b2" : [9200, 18400],
+                  "b3" : [18400, 27600],
+                  "b4" : [24600, 37259]
                  }
     
     start = batch_dict[batch][0]
@@ -46,9 +54,8 @@ def store_lines(batch):
         storeObj(make_lineObj(row, data))
         worked.append(row)
         
-        
     
-        # report every 100 entries
+        # report every 2000 entries
         if row%2000 == 0:
             print("stored entries:", row)
             
