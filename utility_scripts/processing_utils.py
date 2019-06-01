@@ -6,7 +6,6 @@ Institution: University of Edinburgh
 
 # import relevant libraries
 import requests
-from pymongo import MongoClient
 import pandas as pd
 import numpy as np
 
@@ -93,10 +92,6 @@ def insert_line(line, data, station, index, to_remove):
             items.append(index)
             index += 1
         
-        # print out invalid line entries otherwise    
-        else:
-            print("invalid line skipped in:", station, items)
-        
     # make sure the row item matches the dataframe size
     if len(items)==len(data.columns):
         data = append_row(data, items)   
@@ -140,15 +135,9 @@ def make_lineObj(line, data):
 
 def storeObj(obj, database):
     '''
-    configure specified database and store a dict object
+    store a dict object
     '''
-    
-    client = MongoClient(host=database["host"], port=database["port"])
-    
-    db = client[database["dbName"]]
-    weather_data = db[database["collection"]]
-    
-    weather_data.insert_one(obj)  
+    database.insert_one(obj)
       
 
 def store_weather_data(data, database):
