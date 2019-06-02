@@ -18,7 +18,7 @@ def query_to_dataframe(query, collection):
     '''
     
     client = MongoClient(host="localhost", port=27017)
-    weather_data = client.pitds_weather_data[collection]
+    weather_data = client.pitds_assessment3[collection]
     
     entries = []
     for entry in weather_data.find(query):
@@ -49,7 +49,7 @@ def get_fill_values(station, fill_years, feature):
     specified fill years for each month
     '''
     count = 0 # index through the fill years
-    
+
     # cummulatively sum up values from fill years
     for year in fill_years:
         
@@ -60,11 +60,13 @@ def get_fill_values(station, fill_years, feature):
             
         else:
             values = values + pd.concat([df[feature], df.month], axis=1).set_index("month")
-            
-    return values/len(fill_years) # divide by number of fill years to get average
+    
+    if len(fill_years) != 0:     
+        return values/len(fill_years) # divide by number of fill years to get average
+    else:
+        return 0
 
-
-def get_fill_years(station, num_years_to_check=60):
+def get_fill_years(station, feature, num_years_to_check=60):
     '''
     Get the most recently available years of data
     '''
@@ -81,7 +83,7 @@ def get_fill_years(station, num_years_to_check=60):
         if df is None:
             pass
         else:
-            if len(df[df.sun_hours<1000])==12:
+            if len(df[df[feature]<1000])==12:
                 years.append(-year)
             
         if len(years)>=3: # number of fill years to consider
@@ -100,7 +102,7 @@ def fill_feature(feature, data):
     # get fill years
     fill_years = {}
     for station in missing_stations:
-        fill_years[station] = get_fill_years(station)
+        fill_years[station] = get_fill_years(station, feature)
         
     # fill in missing values
     for station in missing_stations:

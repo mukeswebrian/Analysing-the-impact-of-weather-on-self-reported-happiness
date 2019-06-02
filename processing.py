@@ -5,7 +5,7 @@ Institution: University of Edinburgh
 
 Description: This script performs the following actions:
     1. Downloading weather data for a set of stations specified 
-       either as a list contained in a text file "stations.txt". 
+       as a list contained in a text file "stations.txt". 
     2. Cleans the weather data for all the stations by removing 
        non-numerical characters. All the downloaded weather data 
        is loaded into a single data frame.
@@ -20,7 +20,7 @@ from pymongo import MongoClient
 letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
     
-# read station names from a text file or specify a list of stations
+# read station names from a text file (optional: specify a few stations in a list)
 station_names = utils.get_station_names()
 #station_names = ["ballypatrick","cwmystwyth"]
     
@@ -47,4 +47,5 @@ db = client[server["dbName"]]
 database = db[server["collection"]]
     
 utils.store_weather_data(data, database)
-print("storing completed")
+print("storing weather data completed")
+
