@@ -1,7 +1,9 @@
 '''
-Author Exam Number: B145418
+Author: Brian Mukeswe
+Institution: The University of Edinburgh
+Department: School of Informatics
+Contact: b.mukeswe@sms.ed.ac.uk
 Date: May 31, 2019
-Institution: University of Edinburgh 
 
 Description: This script performs clustering of weather data using a set of
              parameters that are specified by the user. The user is required 
