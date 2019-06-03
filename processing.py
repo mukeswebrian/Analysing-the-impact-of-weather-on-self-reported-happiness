@@ -1,7 +1,9 @@
 '''
-Author Exam Number: B145418
+Author: Brian Mukeswe
+Institution: The University of Edinburgh
+Department: School of Informatics
+Contact: b.mukeswe@sms.ed.ac.uk
 Date: May 31, 2019
-Institution: University of Edinburgh 
 
 Description: This script performs the following actions:
     1. Downloading weather data for a set of stations specified 
