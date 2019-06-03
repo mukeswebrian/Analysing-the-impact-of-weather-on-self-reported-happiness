@@ -1,7 +1,8 @@
 '''
-Author Exam Number: B145418
+Author: Brian Mukeswe
+Institution: The University of Edinburgh
+Department: School of Informatics
 Date: June 1, 2019
-Institution: University of Edinburgh 
 
 Description: This script reads happiness data from the a source spreadsheet downloaded 
              from the Office for National Statistics website. 
