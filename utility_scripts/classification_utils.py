@@ -1,7 +1,9 @@
 '''
-Author Exam Number: B145418
+Author: Brian Mukeswe
+Institution: The University of Edinburgh
+Department: School of Informatics
+Contact: b.mukeswe@sms.ed.ac.uk
 Date: June 1, 2019
-Institution: University of Edinburgh 
 '''
 
 # import relevant libraries
