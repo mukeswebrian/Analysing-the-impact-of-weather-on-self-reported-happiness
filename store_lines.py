@@ -1,6 +1,7 @@
 '''
 Author: Brian Mukeswe
 Institution: The University of Edinburgh
+Department: School of Informatics
 Date: May 17, 2019
 
 '''
